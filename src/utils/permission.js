@@ -1,25 +1,37 @@
-import store from '@/store'
-
-/**
- * @param {Array} value
- * @returns {Boolean}
- * @example see @/views/permission/directive.vue
- */
-export default function checkPermission(value) {
-  if (value && value instanceof Array && value.length > 0) {
-    const roles = store.getters && store.getters.roles
-    const permissionRoles = value
-
-    const hasPermission = roles.some(role => {
-      return permissionRoles.includes(role)
-    })
-
-    if (!hasPermission) {
-      return false
+function checkIn(userRoles, roleList) {
+  for (let i = 0; i < userRoles.length; i++) {
+    const userRole = userRoles[i]
+    for (let j = 0; j < userRoles.length; j++) {
+      const roleItem = roleList[j]
+      if (roleItem === userRole) {
+        return true
+      }
     }
-    return true
-  } else {
-    console.error(`need roles! Like v-permission="['admin','editor']"`)
-    return false
   }
+}
+function checkPermission(userRoles, current) {
+  // roles :{include, exclude}
+  const roleMap = current.meta && current.meta.roles
+  if (roleMap) {
+    let permission = true
+    const include = roleMap.include
+    const exclude = roleMap.exclude
+    // 存在于include
+    if (include) {
+      permission = checkIn(userRoles, include)
+    }
+    // 存在于exclude
+    if (exclude && checkIn(userRoles, exclude)) {
+      permission = false
+    }
+    // exclude有决定权
+    return permission
+  } else {
+    // 没有权限要求
+    return true
+  }
+}
+
+export default {
+  checkPermission
 }
