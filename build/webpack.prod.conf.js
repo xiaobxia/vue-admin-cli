@@ -11,6 +11,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ifCdn = process.env.NODE_ENV === 'production' && config.build.ifCdn;
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
@@ -34,8 +35,10 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].[chunkhash:8].js'),
-    chunkFilename: utils.assetsPath('js/[name].[chunkhash:8].js')
+    // filename: utils.assetsPath('js/[name].[chunkhash:8].js'),
+    // chunkFilename: utils.assetsPath('js/[name].[chunkhash:8].js')
+    filename: ifCdn ? utils.assetsPath('[name].[chunkhash:8].js'):utils.assetsPath('js/[name].[chunkhash:8].js'),
+    chunkFilename: ifCdn ? utils.assetsPath('[name].[chunkhash:8].js'):utils.assetsPath('js/[name].[chunkhash:8].js')
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -44,8 +47,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // extract css into its own file
     new MiniCssExtractPlugin({
-      filename: utils.assetsPath('css/[name].[contenthash:8].css'),
-      chunkFilename: utils.assetsPath('css/[name].[contenthash:8].css')
+      filename: ifCdn ? utils.assetsPath('[name].[contenthash:8].css'):utils.assetsPath('css/[name].[contenthash:8].css'),
+      chunkFilename: ifCdn ? utils.assetsPath('[name].[contenthash:8].css'):utils.assetsPath('css/[name].[contenthash:8].css')
     }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
