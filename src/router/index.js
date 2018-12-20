@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
+import componentsRouter from './modules/components'
+import chartsRouter from './modules/charts'
+import tableRouter from './modules/table'
 
 /* Layout */
 import Layout from '@/views/layout/Layout'
@@ -54,7 +57,7 @@ export const constantRouterMap = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
+        meta: { title: 'dashboard', icon: 'fas fa-tachometer-alt', noCache: true }
       }
     ]
   }
@@ -67,47 +70,9 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
-  {
-    path: '/permission',
-    component: Layout,
-    redirect: '/permission/index',
-    alwaysShow: true, // will always show the root menu
-    meta: {
-      title: 'permission',
-      icon: 'lock'
-    },
-    children: [
-      {
-        path: 'page',
-        component: () => import('@/views/permission/page'),
-        name: 'PagePermission',
-        meta: {
-          title: 'pagePermission'
-        }
-      },
-      {
-        path: 'directive',
-        component: () => import('@/views/permission/directive'),
-        name: 'DirectivePermission',
-        meta: {
-          title: 'directivePermission'
-        }
-      }
-    ]
-  },
-
-  {
-    path: '/icon',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/svg-icons/index'),
-        name: 'Icons',
-        meta: { title: 'icons', icon: 'icon', noCache: true }
-      }
-    ]
-  },
+  componentsRouter,
+  chartsRouter,
+  tableRouter,
   {
     path: '/example',
     component: Layout,
@@ -148,7 +113,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/tab/index'),
         name: 'Tab',
-        meta: { title: 'tab', icon: 'tab' }
+        meta: { title: 'tab', icon: 'fas fa-table' }
       }
     ]
   },
@@ -160,7 +125,7 @@ export const asyncRouterMap = [
     name: 'ErrorPages',
     meta: {
       title: 'errorPages',
-      icon: '404'
+      icon: 'fas fa-exclamation-triangle'
     },
     children: [
       {
@@ -185,7 +150,7 @@ export const asyncRouterMap = [
     name: 'Excel',
     meta: {
       title: 'excel',
-      icon: 'excel'
+      icon: 'fas fa-file-excel'
     },
     children: [
       {
@@ -214,7 +179,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/zip/download',
     alwaysShow: true,
-    meta: { title: 'zip', icon: 'zip' },
+    meta: { title: 'zip', icon: 'fas fa-file-archive' },
     children: [
       {
         path: 'download',
@@ -224,21 +189,6 @@ export const asyncRouterMap = [
       }
     ]
   },
-
-  {
-    path: '/theme',
-    component: Layout,
-    redirect: 'noredirect',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/theme/index'),
-        name: 'Theme',
-        meta: { title: 'theme', icon: 'theme' }
-      }
-    ]
-  },
-
   {
     path: '/clipboard',
     component: Layout,
@@ -248,33 +198,19 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/clipboard/index'),
         name: 'ClipboardDemo',
-        meta: { title: 'clipboardDemo', icon: 'clipboard' }
+        meta: { title: 'clipboardDemo', icon: 'fas fa-clipboard' }
       }
     ]
   },
-  {
-    path: '/i18n',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/i18n-demo/index'),
-        name: 'I18n',
-        meta: { title: 'i18n', icon: 'international' }
-      }
-    ]
-  },
-
   {
     path: 'external-link',
     component: Layout,
     children: [
       {
         path: 'https://github.com/PanJiaChen/vue-admin-cli',
-        meta: { title: 'externalLink', icon: 'link' }
+        meta: { title: 'externalLink', icon: 'fas fa-external-link-alt' }
       }
     ]
   },
-
   { path: '*', redirect: '/404', hidden: true }
 ]
