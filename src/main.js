@@ -6,7 +6,6 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import '../static/web-fonts-with-css/css/fontawesome-all.css'
 import './theme/index.css'
 import Element from 'element-ui'
-// import 'element-ui/lib/theme-chalk/index.css'
 
 import '@/styles/index.scss' // global css
 
