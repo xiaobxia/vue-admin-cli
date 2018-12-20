@@ -1,7 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
 import { Message } from 'element-ui'
-import router from '../router/index'
+import storageUtil from '@/utils/storageUtil'
+import router from '@/router/index'
 const basePath = '/serviceBase/'
 
 axios.interceptors.request.use(function(config) {
@@ -15,6 +16,9 @@ axios.interceptors.response.use(function(response) {
   if (response.data.success === false) {
     console.error(response.data.message)
     if (response.data.code === 401) {
+      storageUtil.initUserInfo({
+        isLogin: false
+      })
       router.push('/login')
     } else {
       Message({
