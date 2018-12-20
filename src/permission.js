@@ -9,6 +9,24 @@ NProgress.configure({ showSpinner: false })
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
+  // const token = localStorage.getItem('token') || ''
+  // Http.get('auth/checkLogin', {token}).then((data) => {
+  //   window._token = data.data.token
+  //   if (data.data.isLogin === false) {
+  //     storageUtil.initUserInfo({
+  //       isLogin: false
+  //     })
+  //     const user = storageUtil.getUserInfo()
+  //     if (user.isLogin !== true) {
+  //       this.$router.push('/page/login')
+  //     }
+  //   } else {
+  //     storageUtil.initUserInfo({
+  //       ...data.data,
+  //       isLogin: true
+  //     })
+  //   }
+  // })
   console.log('beforeEach')
   const userInfo = storageUtil.getUserInfo()
   if (userInfo.isLogin === true) {

@@ -7,7 +7,7 @@ const app = {
       withoutAnimation: false
     },
     device: 'desktop',
-    language: storageUtil.getAppConfig('language') || 'en',
+    language: storageUtil.getAppConfig('language') || 'zh',
     size: storageUtil.getAppConfig('size') || 'medium'
   },
   mutations: {
