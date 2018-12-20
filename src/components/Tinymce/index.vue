@@ -88,7 +88,7 @@ export default {
     initTinymce() {
       const _this = this
       window.tinymce.init({
-        language: this.language,
+        language: 'en',
         selector: `#${this.tinymceId}`,
         height: this.height,
         body_class: 'panel-body ',
