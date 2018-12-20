@@ -7,8 +7,7 @@ const app = {
       withoutAnimation: false
     },
     device: 'desktop',
-    language: storageUtil.getAppConfig('language') || 'zh',
-    size: storageUtil.getAppConfig('size') || 'medium'
+    language: storageUtil.getAppConfig('language') || 'zh'
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
