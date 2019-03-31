@@ -1,9 +1,12 @@
 import storageUtil from '@/utils/storageUtil'
-
+let sidebarStatus = storageUtil.getAppConfig('sidebarStatus')
+if (sidebarStatus !== 1 && sidebarStatus !== 0) {
+  sidebarStatus = 1
+}
 const app = {
   state: {
     sidebar: {
-      opened: storageUtil.getAppConfig('sidebarStatus') === 1,
+      opened: sidebarStatus === 1,
       withoutAnimation: false
     },
     device: 'desktop',
