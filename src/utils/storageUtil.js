@@ -1,17 +1,17 @@
-function formatKey (key) {
+function formatKey(key) {
   return `vueAdminCli-${key}`
 }
-function localStorageGetItem (key) {
+function localStorageGetItem(key) {
   return localStorage.getItem(formatKey(key))
 }
-function localStorageSetItem (key, data) {
+function localStorageSetItem(key, data) {
   return localStorage.setItem(formatKey(key), data)
 }
-function localStorageRemoveItem (key) {
+function localStorageRemoveItem(key) {
   return localStorage.removeItem(formatKey(key))
 }
 const storageUtil = {
-  getData: function (name, key) {
+  getData: function(name, key) {
     let value = {}
     if (window[`_${name}`]) {
       value = window[`_${name}`]
@@ -27,7 +27,7 @@ const storageUtil = {
     }
     return value
   },
-  setData: function (name, key, value) {
+  setData: function(name, key, value) {
     let data = this.getData(name)
     if (typeof key === 'object') {
       value = key
@@ -39,9 +39,10 @@ const storageUtil = {
     localStorageSetItem(name, JSON.stringify(data))
     return data
   },
-  clearAll: function () {
+  clearAll: function() {
     window.localStorage.clear()
-  }
+  },
+  localStorageRemoveItem
 }
 
 export default storageUtil

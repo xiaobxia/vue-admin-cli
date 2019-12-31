@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/article'
 import { parseTime } from '@/utils'
 
 // options components
@@ -70,10 +69,6 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      fetchList().then(response => {
-        this.list = response.data.items
-        this.listLoading = false
-      })
     },
     handleDownload() {
       this.downloadLoading = true
