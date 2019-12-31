@@ -1,7 +1,3 @@
-/**
- * Created by jiachenpan on 16/11/18.
- */
-
 export function parseTime(time, cFormat) {
   if (arguments.length === 0) {
     return null
@@ -227,38 +223,37 @@ export function getTime(type) {
   }
 }
 
-export function debounce(func, wait, immediate) {
-  let timeout, args, context, timestamp, result
+export function debounce(fn, delay) {
+  let timer = null
 
-  const later = function() {
-    // 据上一次触发时间间隔
-    const last = +new Date() - timestamp
+  return function() {
+    const args = arguments
+    const context = this
 
-    // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
-    if (last < wait && last > 0) {
-      timeout = setTimeout(later, wait - last)
+    if (timer) {
+      clearTimeout(timer)
+
+      timer = setTimeout(function() {
+        fn.apply(context, args)
+      }, delay)
     } else {
-      timeout = null
-      // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
-      if (!immediate) {
-        result = func.apply(context, args)
-        if (!timeout) context = args = null
-      }
+      timer = setTimeout(function() {
+        fn.apply(context, args)
+      }, delay)
     }
   }
+}
 
-  return function(...args) {
-    context = this
-    timestamp = +new Date()
-    const callNow = immediate && !timeout
-    // 如果延时不存在，重新设定延时
-    if (!timeout) timeout = setTimeout(later, wait)
-    if (callNow) {
-      result = func.apply(context, args)
-      context = args = null
+export function throttle(func, delay) {
+  var prev = Date.now()
+  return function() {
+    var context = this
+    var args = arguments
+    var now = Date.now()
+    if (now - prev >= delay) {
+      func.apply(context, args)
+      prev = Date.now()
     }
-
-    return result
   }
 }
 
