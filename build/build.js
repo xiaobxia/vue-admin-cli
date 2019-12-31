@@ -11,29 +11,10 @@ const webpackConfig = require('./webpack.prod.conf')
 var connect = require('connect')
 var serveStatic = require('serve-static')
 
-
-const cdn = require('./cdn');
-const baseDir = path.resolve(__dirname, '../dist');
-const ifCdn = process.env.NODE_ENV === 'production' && config.build.ifCdn;
-
 const spinner = ora(
   'building for ' + process.env.env_config + ' environment...'
 )
 spinner.start()
-
-if (ifCdn) {
-  cdn.getCdnFileList().then((fileList) => {
-    if (!fileList.length) {
-      console.log('no file');
-      return;
-    }
-    cdn.deleteCdnFile(fileList.map((item) => {
-      return item.key;
-    })).then(() => {
-      console.log('all delete')
-    });
-  });
-}
 
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err

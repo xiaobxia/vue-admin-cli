@@ -8,10 +8,13 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const proxyTable = require('../config/proxyTable')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
+
+const myIp = '192.168.23.129'
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -57,7 +60,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true,
       favicon: resolve('favicon.ico'),
-      title: 'vue-admin-cli',
+      title: 'big-data-cockpit',
       templateParameters: {
         BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory,
       },
@@ -75,16 +78,18 @@ module.exports = new Promise((resolve, reject) => {
       process.env.PORT = port
       // add port to devServer config
       devWebpackConfig.devServer.port = port
-
+      const list = [
+        `Your application is running here: http://localhost:${port}`
+      ]
+      for (const key in proxyTable) {
+        list.push(`${key} application is running here: http://${myIp}:${port}/?pt=${key}`)
+        list.push(`${key} Doc is here: ${proxyTable[key]}vueAdminCli/docs.html`)
+      }
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(
         new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
-            messages: [
-              `Your application is running here: http://${
-                devWebpackConfig.devServer.host
-              }:${port}`
-            ]
+            messages: list
           },
           onErrors: config.dev.notifyOnErrors
             ? utils.createNotifierCallback()

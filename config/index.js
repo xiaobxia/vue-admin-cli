@@ -1,26 +1,32 @@
 'use strict'
 // Template version: 1.2.6
 // see http://vuejs-templates.github.io/webpack for documentation.
-
+const proxyTable = require('./proxyTable')
 const path = require('path')
+
+const newProxyTable = {}
+for (const key in proxyTable) {
+  let row = {
+    target: proxyTable[key],
+    changeOrigin: true,
+    pathRewrite: {}
+  }
+  row.pathRewrite[`^/${key}`] = ''
+  newProxyTable[`/${key}/vueAdminCli`] = row
+}
 
 module.exports = {
   dev: {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      "/serviceBase": {
-        "target": "http://47.98.140.76:3010/"
-        // "target": "http://localhost:3010/"
-      }
-    },
-
+    proxyTable: newProxyTable,
     // Various Dev Server settings
 
     // can be overwritten by process.env.HOST
     // if you want dev by ip, please set host: '0.0.0.0'
-    host: 'localhost',
+    // host: 'localhost',
+    host: '0.0.0.0',
     port: 3000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
@@ -60,9 +66,9 @@ module.exports = {
     // 解决打包时font的问题
     assetsPathInCss: '../../',
     // assetsPublicPath: './',
-    assetsPublicPath: './',
-    cdnPublicPath: 'http://pk0hzm7qe.bkt.clouddn.com/',
-    ifCdn: true,
+    assetsPublicPath: '/',
+    cdnPublicPath: 'http://bkt.clouddn.com/',
+    ifCdn: false,
 
     /**
      * Source Maps
