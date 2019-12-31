@@ -13,6 +13,8 @@ import store from './store'
 import i18n from './lang' // Internationalization
 import './permission' // permission control
 import ScrollTable from '@/directive/scrollTable'
+import Http from '@/utils/httpUtil.js'
+import numberUtil from '@/utils/numberUtil.js'
 
 import * as filters from './filters' // global filters
 
@@ -23,10 +25,16 @@ Vue.use(Element, {
 // 滚动加载表格
 Vue.use(ScrollTable)
 
+Vue.prototype.$http = Http
+
 // register global utility filters.
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
+
+for (const key in numberUtil) {
+  Vue.prototype[key] = numberUtil[key]
+}
 
 Vue.config.productionTip = false
 
