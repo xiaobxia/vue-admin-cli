@@ -14,7 +14,7 @@ const messages = {
 }
 
 const i18n = new VueI18n({
-  locale: storageUtil.getAppConfig('language') || 'zh',
+  locale: storageUtil.getData('appConfig', 'language') || 'zh',
   messages
 })
 

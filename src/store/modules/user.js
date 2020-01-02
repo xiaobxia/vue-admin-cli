@@ -56,7 +56,7 @@ const user = {
       }).then((data) => {
         window._token = data.data.token
         localStorage.setItem('token', data.data.token)
-        storageUtil.initUserInfo({
+        storageUtil.setData('userInfo',{
           ...data.data,
           isLogin: true
         })
@@ -73,7 +73,7 @@ const user = {
         platform: 'mobile'
       }).then(() => {
         localStorage.removeItem('token')
-        storageUtil.initUserInfo({
+        storageUtil.setData('userInfo',{
           isLogin: false
         })
       })

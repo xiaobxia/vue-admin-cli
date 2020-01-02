@@ -1,5 +1,5 @@
 import storageUtil from '@/utils/storageUtil'
-let sidebarStatus = storageUtil.getAppConfig('sidebarStatus')
+let sidebarStatus = storageUtil.getData('appConfig', 'sidebarStatus')
 if (sidebarStatus !== 1 && sidebarStatus !== 0) {
   sidebarStatus = 1
 }
@@ -10,20 +10,20 @@ const app = {
       withoutAnimation: false
     },
     device: 'desktop',
-    language: storageUtil.getAppConfig('language') || 'zh'
+    language: storageUtil.getData('appConfig', 'language') || 'zh'
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
       if (state.sidebar.opened) {
-        storageUtil.setAppConfig('sidebarStatus', 0)
+        storageUtil.setData('appConfig','sidebarStatus', 0)
       } else {
-        storageUtil.setAppConfig('sidebarStatus', 1)
+        storageUtil.setData('appConfig','sidebarStatus', 1)
       }
       state.sidebar.opened = !state.sidebar.opened
       state.sidebar.withoutAnimation = false
     },
     CLOSE_SIDEBAR: (state, withoutAnimation) => {
-      storageUtil.setAppConfig('sidebarStatus', 0)
+      storageUtil.setData('appConfig','sidebarStatus', 0)
       state.sidebar.opened = false
       state.sidebar.withoutAnimation = withoutAnimation
     },
@@ -32,11 +32,11 @@ const app = {
     },
     SET_LANGUAGE: (state, language) => {
       state.language = language
-      storageUtil.setAppConfig('language', language)
+      storageUtil.setData('appConfig','language', language)
     },
     SET_SIZE: (state, size) => {
       state.size = size
-      storageUtil.setAppConfig('size', size)
+      storageUtil.setData('appConfig','size', size)
     }
   },
   actions: {
