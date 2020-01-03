@@ -64,7 +64,7 @@
         layout="prev, pager, next, jumper"
         @current-change="handleCurrentChange"/>
     </div>
-    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='add'?'新增':'修改'">
+    <el-dialog :visible.sync="dialogVisible" :destroy-on-close="true" :title="dialogType==='add'?'新增':'修改'">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="角色名称" prop="roleName">
           <el-input v-model="form.roleName" placeholder="必填,15个汉字内"/>
