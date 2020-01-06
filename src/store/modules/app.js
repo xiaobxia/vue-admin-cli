@@ -15,15 +15,15 @@ const app = {
   mutations: {
     TOGGLE_SIDEBAR: state => {
       if (state.sidebar.opened) {
-        storageUtil.setData('appConfig','sidebarStatus', 0)
+        storageUtil.setData('appConfig', 'sidebarStatus', 0)
       } else {
-        storageUtil.setData('appConfig','sidebarStatus', 1)
+        storageUtil.setData('appConfig', 'sidebarStatus', 1)
       }
       state.sidebar.opened = !state.sidebar.opened
       state.sidebar.withoutAnimation = false
     },
     CLOSE_SIDEBAR: (state, withoutAnimation) => {
-      storageUtil.setData('appConfig','sidebarStatus', 0)
+      storageUtil.setData('appConfig', 'sidebarStatus', 0)
       state.sidebar.opened = false
       state.sidebar.withoutAnimation = withoutAnimation
     },
@@ -32,11 +32,11 @@ const app = {
     },
     SET_LANGUAGE: (state, language) => {
       state.language = language
-      storageUtil.setData('appConfig','language', language)
+      storageUtil.setData('appConfig', 'language', language)
     },
     SET_SIZE: (state, size) => {
       state.size = size
-      storageUtil.setData('appConfig','size', size)
+      storageUtil.setData('appConfig', 'size', size)
     }
   },
   actions: {

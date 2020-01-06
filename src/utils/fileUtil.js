@@ -5,9 +5,9 @@ export default {
   },
   // 下载文件流
   downloadBlob(data, name, type) {
-    let blob = new Blob([data])
-    let downloadElement = document.createElement('a')
-    let href = window.URL.createObjectURL(blob) // 创建下载的链接
+    const blob = new Blob([data])
+    const downloadElement = document.createElement('a')
+    const href = window.URL.createObjectURL(blob) // 创建下载的链接
     downloadElement.href = href
     downloadElement.download = `${name}.${type}` // 下载后文件名
     document.body.appendChild(downloadElement)
