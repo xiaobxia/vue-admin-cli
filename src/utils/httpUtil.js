@@ -16,7 +16,7 @@ function getUrlParamValue(name) {
 }
 // 默认连接地址，只在调试时有用
 if (process.env.NODE_ENV === 'development') {
-  basePath = `/${getUrlParamValue('pt') || 'jb'}${basePath}`
+  basePath = `/${getUrlParamValue('pt') || 'main'}${basePath}`
 }
 
 axios.interceptors.request.use(function(config) {
