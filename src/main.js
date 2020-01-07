@@ -15,6 +15,7 @@ import './permission' // permission control
 import ScrollTable from '@/directive/scrollTable'
 import Http from '@/utils/httpUtil.js'
 import numberUtil from '@/utils/numberUtil.js'
+import stringUtil from '@/utils/stringUtil.js'
 
 import * as filters from './filters' // global filters
 
@@ -34,6 +35,10 @@ Object.keys(filters).forEach(key => {
 
 for (const key in numberUtil) {
   Vue.prototype[key] = numberUtil[key]
+}
+
+for (const key in stringUtil) {
+  Vue.prototype[key] = stringUtil[key]
 }
 
 Vue.config.productionTip = false
