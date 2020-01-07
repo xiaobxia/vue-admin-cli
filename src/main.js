@@ -34,11 +34,15 @@ Object.keys(filters).forEach(key => {
 })
 
 for (const key in numberUtil) {
-  Vue.prototype[key] = numberUtil[key]
+  if (numberUtil.hasOwnProperty(key)) {
+    Vue.prototype[key] = numberUtil[key]
+  }
 }
 
 for (const key in stringUtil) {
-  Vue.prototype[key] = stringUtil[key]
+  if (stringUtil.hasOwnProperty(key)) {
+    Vue.prototype[key] = stringUtil[key]
+  }
 }
 
 Vue.config.productionTip = false

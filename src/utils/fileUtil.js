@@ -14,5 +14,17 @@ export default {
     downloadElement.click() // 点击下载
     document.body.removeChild(downloadElement) // 下载完成移除元素
     window.URL.revokeObjectURL(href) // 释放掉blob对象
+  },
+  // 创建上传的FormData
+  createUploadFormData(target) {
+    target = target || {}
+    const formData = new FormData()
+    // 向 formData 对象中添加文件
+    for (const key in target) {
+      if (target.hasOwnProperty(key)) {
+        formData.append(key, target[key])
+      }
+    }
+    return formData
   }
 }
