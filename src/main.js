@@ -16,6 +16,7 @@ import ScrollTable from '@/directive/scrollTable'
 import Http from '@/utils/httpUtil.js'
 import numberUtil from '@/utils/numberUtil.js'
 import stringUtil from '@/utils/stringUtil.js'
+import fileUtil from '@/utils/fileUtil.js'
 
 import * as filters from './filters' // global filters
 
@@ -42,6 +43,12 @@ for (const key in numberUtil) {
 for (const key in stringUtil) {
   if (stringUtil.hasOwnProperty(key)) {
     Vue.prototype[key] = stringUtil[key]
+  }
+}
+
+for (const key in fileUtil) {
+  if (fileUtil.hasOwnProperty(key)) {
+    Vue.prototype[key] = fileUtil[key]
   }
 }
 

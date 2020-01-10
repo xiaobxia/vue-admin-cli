@@ -4,8 +4,11 @@ export default {
     return `data:image/${type};base64,${str}`
   },
   // 下载文件流
-  downloadBlob(data, name, type) {
-    const blob = new Blob([data])
+  downloadExcel(data, name, type) {
+    const blob = new Blob(
+      [data],
+      { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }
+    )
     const downloadElement = document.createElement('a')
     const href = window.URL.createObjectURL(blob) // 创建下载的链接
     downloadElement.href = href

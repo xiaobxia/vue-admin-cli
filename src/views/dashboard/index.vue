@@ -3,6 +3,7 @@
     <el-alert
       title="主页"
       type="success"/>
+    <el-button type="primary" @click="exportFile">主要按钮</el-button>
   </div>
 </template>
 
@@ -18,6 +19,13 @@ export default {
   computed: {
   },
   created() {
+  },
+  methods: {
+    exportFile() {
+      this.$http.get('download/exportXlsx', {}, { responseType: 'arraybuffer' }).then((res) => {
+        this.downloadExcel(res, '用户列表', 'xlsx')
+      })
+    }
   }
 }
 </script>
