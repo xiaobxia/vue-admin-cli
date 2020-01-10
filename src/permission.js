@@ -22,7 +22,7 @@ router.beforeEach((to, from, next) => {
     } else {
       // 没有生成过
       if (store.getters.addRouters.length === 0) {
-        store.dispatch('GenerateRoutes', { roles: userInfo.roles }).then(() => {
+        store.dispatch('generateRoutes', { roles: userInfo.roles }).then(() => {
           console.log('生成菜单')
           // router里面原本只有基础的路由，是后来添加的有权限的路由
           router.addRoutes(store.getters.addRouters)

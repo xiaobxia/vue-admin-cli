@@ -11,13 +11,21 @@ const permission = {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
       state.routers = routers.concat(constantRouterMap)
+      state.ifAdd = true
     }
   },
   actions: {
-    GenerateRoutes({ commit }, data) {
+    generateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
         commit('SET_ROUTERS', permissionUtil.filterAsyncRouter(asyncRouterMap, roles))
+        resolve()
+      })
+    },
+    generateRoutesWithMenu({ commit }, data) {
+      return new Promise(resolve => {
+        const { menu } = data
+        commit('SET_ROUTERS', permissionUtil.filterAsyncRouterWithMenu(asyncRouterMap, menu))
         resolve()
       })
     }
