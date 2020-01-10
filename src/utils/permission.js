@@ -72,6 +72,12 @@ function filterAsyncRouter(routes, roles) {
   return res
 }
 
+/**
+ * 通过服务端下发菜单来控制权限
+ * @param routes
+ * @param menu
+ * @returns {Array}
+ */
 function filterAsyncRouterWithMenu(routes, menu) {
   const res = []
   if (menu.length === 0) {
