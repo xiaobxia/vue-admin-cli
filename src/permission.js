@@ -10,7 +10,10 @@ NProgress.configure({ showSpinner: false })
 router.beforeEach((to, from, next) => {
   NProgress.start()
   console.log('beforeEach')
+  console.log(from)
+  console.log(to)
   const userInfo = storageUtil.getData('userInfo')
+  // 和移动端不一样，管理后台所有东西都得是先登录才能用
   if (userInfo.isLogin === true) {
     // 登入了还去登录，直接转首页
     if (to.path === '/login') {
@@ -43,6 +46,9 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-router.afterEach(() => {
+router.afterEach((to, from) => {
+  console.log('afterEach')
+  console.log(from)
+  console.log(to)
   NProgress.done() // finish progress bar
 })
