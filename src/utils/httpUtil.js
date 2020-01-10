@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 import { Message } from 'element-ui'
 
-let basePath = '/vueAdminCli/'
+let basePath = '/serviceBase/'
 
 function getUrlParamValue(name) {
   if (name == null || name === 'undefined') { return null }
