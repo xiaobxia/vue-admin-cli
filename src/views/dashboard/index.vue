@@ -26,7 +26,8 @@
 </template>
 
 <script>
-
+import treeUtil from '@/utils/treeUtil'
+import arrayUtil from '@/utils/arrayUtil'
 export default {
   name: 'Dashboard',
   components: { },
@@ -86,16 +87,17 @@ export default {
     treeCheck(a, b) {
       if (a.children && a.children.length > 0) {
         const rowCheckedKeys = b.checkedKeys
-        if (rowCheckedKeys.indexOf(a.id) !== 1) {
+        const subKeys = treeUtil.getChildrenKeys(a.children, 'id')
+        if (rowCheckedKeys.indexOf(a.id) !== -1) {
           // 选中状态
-          a.children.forEach((item) => {
-          })
+          const newCheckedKeys = arrayUtil.pushArray(rowCheckedKeys, subKeys)
+          this.$refs.tree.setCheckedKeys(newCheckedKeys)
         } else {
           // 取消状态
+          const newCheckedKeys = arrayUtil.removeArray(rowCheckedKeys, subKeys)
+          this.$refs.tree.setCheckedKeys(newCheckedKeys)
         }
       }
-      console.log(a)
-      console.log(b)
     },
     getCheckedNodes() {
       console.log(this.$refs.tree.getCheckedNodes())
