@@ -85,6 +85,7 @@ export default {
       })
     },
     treeCheck(a, b) {
+      // 不需要管被点击的自己
       if (a.children && a.children.length > 0) {
         const rowCheckedKeys = b.checkedKeys
         const subKeys = treeUtil.getChildrenKeys(a.children, 'id')
