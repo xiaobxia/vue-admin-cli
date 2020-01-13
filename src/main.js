@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import '../static/web-fonts-with-css/css/fontawesome-all.css'
-import './theme/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
 import Element from 'element-ui'
 
 import '@/styles/index.scss' // global css
