@@ -1,3 +1,5 @@
+// 也可以使用file-saver库操作
+
 export default {
   // 通过base64创建图片
   createBase64Img(type, str) {
