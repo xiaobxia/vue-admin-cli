@@ -1,22 +1,13 @@
 import axios from 'axios'
 import qs from 'qs'
 import { Message } from 'element-ui'
+import urlUtil from './urlUtil'
 
 let basePath = '/serviceBase/'
 
-function getUrlParamValue(name) {
-  if (name == null || name === 'undefined') { return null }
-  var searchStr = decodeURI(location.search)
-  var infoIndex = searchStr.indexOf(name + '=')
-  if (infoIndex === -1) { return null }
-  var searchInfo = searchStr.substring(infoIndex + name.length + 1)
-  var tagIndex = searchInfo.indexOf('&')
-  if (tagIndex !== -1) { searchInfo = searchInfo.substring(0, tagIndex) }
-  return searchInfo
-}
 // 默认连接地址，只在调试时有用
 if (process.env.NODE_ENV === 'development') {
-  basePath = `/${getUrlParamValue('pt') || 'main'}${basePath}`
+  basePath = `/${urlUtil.getQueryStringArgs('pt') || 'main'}${basePath}`
 }
 
 axios.interceptors.request.use(function(config) {
