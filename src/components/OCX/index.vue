@@ -22,14 +22,18 @@ export default {
   methods: {
     // 创建设备对象
     creatObject() {
-      const target = document.createElement('OBJECT')
-      target.setAttribute('id', 'fpDevObj')
-      target.setAttribute('classid', 'CLSID:0B6CD28F-5650-4FC9-877D-F8398F5A656F')
-      target.setAttribute('codebase', 'mxCapacitiveDriver.ocx')
-      target.setAttribute('width', '0')
-      target.setAttribute('height', '0')
-      const body = document.getElementsByTagName('body')[0]
-      body.appendChild(target)
+      const has = document.getElementById('fpDevObj')
+      // 已经存在那就不创建了
+      if (!has) {
+        const target = document.createElement('OBJECT')
+        target.setAttribute('id', 'fpDevObj')
+        target.setAttribute('classid', 'CLSID:0B6CD28F-5650-4FC9-877D-F8398F5A656F')
+        target.setAttribute('codebase', 'mxCapacitiveDriver.ocx')
+        target.setAttribute('width', '0')
+        target.setAttribute('height', '0')
+        const body = document.getElementsByTagName('body')[0]
+        body.appendChild(target)
+      }
     },
     // 获取当前路径
     getCurrentDirectory() {
