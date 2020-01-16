@@ -60,6 +60,18 @@ export const constantRouterMap = [
         meta: { title: 'dashboard', icon: 'fas fa-tachometer-alt', noCache: true }
       }
     ]
+  },
+  {
+    path: '/ocxPage',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/ocxPage/index'),
+        name: 'OCXPage',
+        meta: { title: 'ocxPage', icon: 'fas fa-tachometer-alt', noCache: true }
+      }
+    ]
   }
 ]
 
