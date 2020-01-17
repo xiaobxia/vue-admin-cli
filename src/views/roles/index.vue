@@ -90,16 +90,14 @@
 
 <script>
 function createFormKey(tar) {
-  const raw = {
+  let raw = {
     roleName: '',
     roleCode: '',
     remark: '',
     status: 0
   }
   if (tar) {
-    for (const key in raw) {
-      raw[key] = tar[key]
-    }
+    raw = Object.assign(raw, tar)
   }
   return raw
 }
