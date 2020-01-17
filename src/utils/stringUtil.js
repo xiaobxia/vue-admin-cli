@@ -21,5 +21,13 @@ export default {
     } else {
       return str
     }
+  },
+  createBlankSpace(len) {
+    len = len || 0
+    let str = ''
+    for (let i = 0; i < len; i++) {
+      str += '&nbsp;'
+    }
+    return str
   }
 }

@@ -3,7 +3,7 @@
     <el-alert
       title="主页"
       type="success"/>
-    <el-button type="primary" @click="exportFile">主要按钮</el-button>
+    <el-button type="primary" @click="exportFile">主要<blank-space :len="12"/>按钮</el-button>
     <el-tree
       ref="tree"
       :data="data"
@@ -27,9 +27,11 @@
 <script>
 import treeUtil from '@/utils/treeUtil'
 import arrayUtil from '@/utils/arrayUtil'
+import BlankSpace from '@/components/BlankSpace'
 
 export default {
   name: 'Dashboard',
+  components: { BlankSpace },
   data() {
     return {
       data: [{
@@ -73,6 +75,7 @@ export default {
       }
     }
   },
+  component: { BlankSpace },
   computed: {
   },
   created() {
