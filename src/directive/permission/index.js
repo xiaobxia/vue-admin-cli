@@ -1,17 +1,15 @@
-import permission from './permission'
-import auth from './auth'
+import Permission from './permission'
 // 按钮级别鉴权
 
 const install = function(Vue) {
-  Vue.directive('permission', permission)
-  Vue.directive('auth', auth)
+  Vue.directive('Permission', Permission)
 }
 
 if (window.Vue) {
-  window['permission'] = permission
-  window['auth'] = auth
-
+  window.permission = Permission
   Vue.use(install); // eslint-disable-line
 }
 
-export default install
+Permission.install = install
+
+export default Permission
