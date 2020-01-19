@@ -54,6 +54,11 @@ for (const key in fileUtil) {
   }
 }
 
+// 按钮级别鉴权
+Vue.prototype.hasPermission = function(key) {
+  return false
+}
+
 Vue.config.productionTip = false
 
 new Vue({
