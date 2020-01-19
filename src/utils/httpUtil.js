@@ -65,11 +65,11 @@ const Http = {
     return axios.get(makeUrl(url + (queryString ? '?' + queryString : '')), options).then(data => data.data)
   },
   post(url, param, options) {
+    return axios.post(makeUrl(url), param, options).then(data => data.data)
+  },
+  postJson(url, param, options) {
     param = param || {}
     return axios.post(makeUrl(url), qs.stringify(param), options).then(data => data.data)
-  },
-  postRow(url, param, options) {
-    return axios.post(makeUrl(url), param, options).then(data => data.data)
   },
   makeUrl
 }

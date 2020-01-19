@@ -49,7 +49,7 @@ const user = {
     // 用户名登录
     LoginByUsername({ commit }, userInfo) {
       const username = userInfo.username.trim()
-      return Http.post('auth/login', {
+      return Http.postJson('auth/login', {
         account: username,
         password: md5(userInfo.password),
         platform: 'pc'
