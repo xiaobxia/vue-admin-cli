@@ -59,6 +59,21 @@ Vue.prototype.hasPermission = function(key) {
   return false
 }
 
+// 分页删除后验证
+Vue.prototype.getPageIndexAfterDelete = function(pageIndex, size, total, deleteNum) {
+  deleteNum = deleteNum || 1
+  let res = total - deleteNum
+  if (res < 0) {
+    res = 0
+  }
+  const newAll = pageIndex * size
+  if (newAll <= res) {
+    return pageIndex
+  } else {
+    return Math.ceil(res / size)
+  }
+}
+
 Vue.config.productionTip = false
 
 new Vue({
