@@ -59,7 +59,7 @@ Vue.prototype.hasPermission = function(key) {
   return false
 }
 
-// 分页删除后验证
+// 删除后获取分页位置
 Vue.prototype.getPageIndexAfterDelete = function(pageIndex, size, total, deleteNum) {
   deleteNum = deleteNum || 1
   let res = total - deleteNum
