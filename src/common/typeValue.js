@@ -8,6 +8,7 @@ function findLabel(list, value) {
   }
   return ''
 }
+// 用户状态
 const USER_STATUS_LIST = [
   { value: '0', label: '禁用' },
   { value: '1', label: '启用' }
