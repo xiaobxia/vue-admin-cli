@@ -22,6 +22,14 @@
       <el-button @click="resetChecked">清空</el-button>
     </div>
     <el-button type="primary" @click="updateRouter">更新路由</el-button>
+    <el-select v-model="userStatus" placeholder="请选择" @change="userStatusChangeHandler">
+      <el-option label="全部" value=""/>
+      <el-option
+        v-for="item in $USER_STATUS_LIST"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"/>
+    </el-select>
   </div>
 </template>
 
@@ -73,7 +81,8 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'label'
-      }
+      },
+      userStatus: ''
     }
   },
   component: { BlankSpace },
@@ -127,6 +136,9 @@ export default {
       this.$refs.tree.setCheckedKeys([])
     },
     updateRouter() {
+    },
+    userStatusChangeHandler(value) {
+      console.log(this.$formatUserStatus(value) || '全部')
     }
   }
 }

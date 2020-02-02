@@ -1,5 +1,5 @@
 <template>
-  <span v-html="createBlankSpace(len)"/>
+  <span v-html="$createBlankSpace(len)"/>
 </template>
 
 <script>

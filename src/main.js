@@ -20,6 +20,8 @@ import numberUtil from '@/utils/numberUtil.js'
 import stringUtil from '@/utils/stringUtil.js'
 import fileUtil from '@/utils/fileUtil.js'
 
+import typeValue from '@/common/typeValue' // global filters
+
 import * as filters from './filters' // global filters
 
 Vue.use(Element, {
@@ -29,28 +31,39 @@ Vue.use(Element, {
 // 滚动加载表格
 Vue.use(ScrollTable)
 
-Vue.prototype.$http = Http
-
 // register global utility filters.
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
+// HTTP工具
+Vue.prototype.$http = Http
+
+// 数字工具
 for (const key in numberUtil) {
   if (numberUtil.hasOwnProperty(key)) {
     Vue.prototype['$' + key] = numberUtil[key]
   }
 }
 
+// 字符串工具
 for (const key in stringUtil) {
   if (stringUtil.hasOwnProperty(key)) {
     Vue.prototype['$' + key] = stringUtil[key]
   }
 }
 
+// 文件工具
 for (const key in fileUtil) {
   if (fileUtil.hasOwnProperty(key)) {
     Vue.prototype['$' + key] = fileUtil[key]
+  }
+}
+
+// 常量格式化
+for (const key in typeValue) {
+  if (typeValue.hasOwnProperty(key)) {
+    Vue.prototype['$' + key] = typeValue[key]
   }
 }
 
