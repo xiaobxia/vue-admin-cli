@@ -21,6 +21,7 @@
       <el-button @click="setCheckedKeys">通过 key 设置</el-button>
       <el-button @click="resetChecked">清空</el-button>
     </div>
+    <el-button type="primary" @click="updateRouter">更新路由</el-button>
   </div>
 </template>
 
@@ -79,11 +80,13 @@ export default {
   computed: {
   },
   created() {
+    console.log(this.$route)
+    console.log(this.$router)
   },
   methods: {
     exportFile() {
       this.$http.get('download/exportXlsx', {}, { responseType: 'arraybuffer' }).then((res) => {
-        this.downloadExcel(res, '用户列表', 'xlsx')
+        this.$downloadExcel(res, '用户列表', 'xlsx')
       })
     },
     treeCheck(a, b) {
@@ -122,6 +125,8 @@ export default {
     },
     resetChecked() {
       this.$refs.tree.setCheckedKeys([])
+    },
+    updateRouter() {
     }
   }
 }

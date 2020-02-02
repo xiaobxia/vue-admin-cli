@@ -38,29 +38,29 @@ Object.keys(filters).forEach(key => {
 
 for (const key in numberUtil) {
   if (numberUtil.hasOwnProperty(key)) {
-    Vue.prototype[key] = numberUtil[key]
+    Vue.prototype['$' + key] = numberUtil[key]
   }
 }
 
 for (const key in stringUtil) {
   if (stringUtil.hasOwnProperty(key)) {
-    Vue.prototype[key] = stringUtil[key]
+    Vue.prototype['$' + key] = stringUtil[key]
   }
 }
 
 for (const key in fileUtil) {
   if (fileUtil.hasOwnProperty(key)) {
-    Vue.prototype[key] = fileUtil[key]
+    Vue.prototype['$' + key] = fileUtil[key]
   }
 }
 
 // 按钮级别鉴权
-Vue.prototype.hasPermission = function(key) {
+Vue.prototype.$hasPermission = function(key) {
   return false
 }
 
 // 删除后获取分页位置
-Vue.prototype.getPageIndexAfterDelete = function(pageIndex, size, total, deleteNum) {
+Vue.prototype.$getPageIndexAfterDelete = function(pageIndex, size, total, deleteNum) {
   deleteNum = deleteNum || 1
   let res = total - deleteNum
   if (res < 0) {
