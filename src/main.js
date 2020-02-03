@@ -39,33 +39,21 @@ Object.keys(filters).forEach(key => {
 // HTTP工具
 Vue.prototype.$http = Http
 
+function registerUtil(util) {
+  for (const key in util) {
+    if (util.hasOwnProperty(key)) {
+      Vue.prototype['$' + key] = util[key]
+    }
+  }
+}
 // 数字工具
-for (const key in numberUtil) {
-  if (numberUtil.hasOwnProperty(key)) {
-    Vue.prototype['$' + key] = numberUtil[key]
-  }
-}
-
+registerUtil(numberUtil)
 // 字符串工具
-for (const key in stringUtil) {
-  if (stringUtil.hasOwnProperty(key)) {
-    Vue.prototype['$' + key] = stringUtil[key]
-  }
-}
-
+registerUtil(stringUtil)
 // 文件工具
-for (const key in fileUtil) {
-  if (fileUtil.hasOwnProperty(key)) {
-    Vue.prototype['$' + key] = fileUtil[key]
-  }
-}
-
+registerUtil(fileUtil)
 // 常量格式化
-for (const key in typeValue) {
-  if (typeValue.hasOwnProperty(key)) {
-    Vue.prototype['$' + key] = typeValue[key]
-  }
-}
+registerUtil(typeValue)
 
 // 按钮级别鉴权
 Vue.prototype.$hasPermission = function(key) {
