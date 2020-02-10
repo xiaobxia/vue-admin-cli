@@ -1,4 +1,5 @@
 'use strict'
+const os = require('os')
 const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')
@@ -13,8 +14,21 @@ const proxyTable = require('../config/proxyTable')
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
-
-const myIp = '192.168.23.129'
+function getIPAdress(){
+  const interfaces = os.networkInterfaces()
+  for(let devName in interfaces){
+    let iface = interfaces[devName]
+    for(let i = 0; i < iface.length; i++){
+      let alias = iface[i]
+      if(alias.family === 'IPv4' &&
+      alias.address !== '127.0.0.1' &&
+      !alias,internal){
+        return alias.address
+      }
+    }
+  }
+}
+const myIp = getIPAdress() //本地IP地址
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
