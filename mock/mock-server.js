@@ -35,7 +35,6 @@ module.exports = app => {
   const mockRoutes = registerRoutes(app)
   var mockRoutesLength = mockRoutes.mockRoutesLength
   var mockStartIndex = mockRoutes.mockStartIndex
-  console.log(app._router.stack)
   // watch files, hot reload mock server
   chokidar.watch(mockDir, {
     ignored: /mock-server/,
