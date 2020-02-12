@@ -66,6 +66,8 @@ module.exports = {
     // 解决打包时font的问题
     assetsPathInCss: '../../',
     // assetsPublicPath: './',
+    // 一个端口部署多个vue项目，assetsPublicPath: "/项目名/"
+    // nginx: location /项目名 {}
     assetsPublicPath: '/',
     cdnPublicPath: 'http://bkt.clouddn.com/',
     ifCdn: false,
