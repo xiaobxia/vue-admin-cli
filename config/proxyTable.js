@@ -1,4 +1,12 @@
 module.exports = {
-  // 'main': 'http://localhost:3010/'
-  'main': 'http://47.98.140.76:3010/'
+  main: [
+    {
+      base: 'serviceBase',
+      url: 'http://47.98.140.76:3010/'
+    },
+    {
+      base: 'ucenter',
+      url: 'http://218.75.42.15:8097/'
+    }
+  ]
 }

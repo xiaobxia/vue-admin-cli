@@ -6,13 +6,15 @@ const path = require('path')
 
 const newProxyTable = {}
 for (const key in proxyTable) {
-  let row = {
-    target: proxyTable[key],
-    changeOrigin: true,
-    pathRewrite: {}
-  }
-  row.pathRewrite[`^/${key}`] = ''
-  newProxyTable[`/${key}/serviceBase`] = row
+  proxyTable[key].forEach((item)=>{
+    let row = {
+      target: item.url,
+      changeOrigin: true,
+      pathRewrite: {}
+    }
+    row.pathRewrite[`^/${key}`] = ''
+    newProxyTable[`/${key}/${item.base}`] = row
+  })
 }
 
 module.exports = {
