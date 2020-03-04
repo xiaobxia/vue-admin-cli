@@ -1,7 +1,13 @@
-function formatNum(str) {
-  var newStr = ''
-  var count = 0
+function formatNum(str, len) {
+  let newStr = ''
+  let count = 0
   let startCode = ''
+  len = len || 2
+  let zero = ''
+  for (let i = 0; i < len; i++) {
+    zero += '0'
+  }
+  str = '' + str
   if (str.charAt(0) === '-') {
     str = str.slice(1)
     startCode = '-'
@@ -16,8 +22,9 @@ function formatNum(str) {
       }
       count++
     }
-    str = newStr + '.00' // 自动补小数点后两位
-    return str
+    str = newStr + `.${zero}`
+    // 自动补小数点后两位
+    return startCode + str
   } else {
     for (let i = str.indexOf('.') - 1; i >= 0; i--) {
       if (count % 3 === 0 && count !== 0) {
@@ -27,7 +34,7 @@ function formatNum(str) {
       }
       count++
     }
-    str = newStr + (str + '00').substr((str + '00').indexOf('.'), 3)
+    str = newStr + (str + zero).substr((str + zero).indexOf('.'), len + 1)
     return startCode + str
   }
 }
