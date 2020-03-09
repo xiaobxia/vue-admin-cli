@@ -101,6 +101,16 @@ body {
   z-index: 1000 !important;
 }
 
+.print-img-wrap {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  img {
+    width: auto;
+    height: auto;
+  }
+}
+
 @import './element-ui.scss';
 @import './sidebar.scss';
 @import './btn.scss';
