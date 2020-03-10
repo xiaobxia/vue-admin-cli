@@ -98,7 +98,6 @@ module.exports = new Promise((resolve, reject) => {
       ]
       for (const key in proxyTable) {
         list.push(`${key} application is running here: http://${myIp}:${port}/?pt=${key}`)
-        list.push(`${key} Doc is here: ${proxyTable[key]}vueAdminCli/docs.html`)
       }
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(
