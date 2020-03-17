@@ -20,6 +20,10 @@ axios.interceptors.request.use(function(config) {
 axios.interceptors.response.use(function(response) {
   if (response.data.status === false) {
     if (response.data.code === 401) {
+      // 未登录
+      // 有些接口可以不拦截
+      if (!response.config.noAuth) {
+      }
       Message({
         message: response.data.message,
         type: 'error',
