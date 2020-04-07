@@ -146,3 +146,8 @@ body {
 @import './element-ui.scss';
 @import './sidebar.scss';
 @import './btn.scss';
+
+// 表格对齐
+body .el-table th.gutter {
+  display: table-cell !important;
+}
