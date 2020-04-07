@@ -102,6 +102,7 @@ const numberUtil = {
         .replace(/^整$/, '零元整')
     )
   },
+  // 只能是数字
   replaceNoNumber(value) {
     // 修复第一个字符是小数点 的情况.
     if (value !== '' && value.substr(0, 1) === '.') {
@@ -123,6 +124,7 @@ const numberUtil = {
     }
     return value
   },
+  // 只能是数字串
   replaceToNumberStr(value) {
     return value.replace(/[^\d]/g, '')
   }
