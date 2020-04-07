@@ -66,7 +66,65 @@ const numberUtil = {
     return (number >= (target - step)) && (number <= (target + step))
   },
   formatMoney(number) {
-    return formatNum(this.toTwoDecimals(number))
+    return formatNum(number, 2)
+  },
+  // 数字转大写
+  digitUppercase(n) {
+    const fraction = ['角', '分']
+    const digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
+    const unit = [
+      ['元', '万', '亿'],
+      ['', '拾', '佰', '仟']
+    ]
+    const head = n < 0 ? '欠' : ''
+    n = Math.abs(n)
+    let s = ''
+    for (let i = 0; i < fraction.length; i++) {
+      s += (
+        digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]
+      ).replace(/零./, '')
+    }
+    s = s || '整'
+    n = Math.floor(n)
+    for (let i = 0; i < unit[0].length && n > 0; i++) {
+      let p = ''
+      for (let j = 0; j < unit[1].length && n > 0; j++) {
+        p = digit[n % 10] + unit[1][j] + p
+        n = Math.floor(n / 10)
+      }
+      s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s
+    }
+    return (
+      head +
+      s
+        .replace(/(零.)*零元/, '元')
+        .replace(/(零.)+/g, '零')
+        .replace(/^整$/, '零元整')
+    )
+  },
+  replaceNoNumber(value) {
+    // 修复第一个字符是小数点 的情况.
+    if (value !== '' && value.substr(0, 1) === '.') {
+      value = ''
+    }
+    value = value.replace(/^0*(0\.|[1-9])/, '$1') // 解决 粘贴不生效
+    value = value.replace(/[^-\d.]/g, '') // 清除“数字”和“.”以外的字符
+    value = value.replace(/\.{2,}/g, '.') // 只保留第一个. 清除多余的
+    value = value
+      .replace('.', '$#$')
+      .replace(/\./g, '')
+      .replace('$#$', '.')
+    value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3') // 只能输入两个小数
+    if (value.indexOf('.') < 0 && value !== '') {
+      // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+      if (value.substr(0, 1) === '0' && value.length === 2) {
+        value = value.substr(1, value.length)
+      }
+    }
+    return value
+  },
+  replaceToNumberStr(value) {
+    return value.replace(/[^\d]/g, '')
   }
 }
 

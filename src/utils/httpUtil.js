@@ -23,6 +23,7 @@ axios.interceptors.response.use(function(response) {
       // 未登录
       // 有些接口可以不拦截
       if (!response.config.noAuth) {
+        console.log('noAuth request')
       }
       Message({
         message: response.data.message,
