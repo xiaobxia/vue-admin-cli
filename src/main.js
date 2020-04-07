@@ -23,8 +23,6 @@ import fileUtil from '@/utils/fileUtil.js'
 import typeValue from '@/common/typeValue' // global filters
 
 import * as filters from './filters' // global filters
-import domImage from '@/utils/domImage'
-import uuid from 'uuid/v1'
 
 Vue.use(Element, {
   i18n: (key, value) => i18n.t(key, value)
@@ -75,32 +73,6 @@ Vue.prototype.$getPageIndexAfterDelete = function(pageIndex, size, total, delete
   } else {
     return Math.ceil(res / size)
   }
-}
-
-// 打印的方法
-Vue.prototype.$print = function(cid) {
-  document.getElementsByTagName('html')[0].classList.add('printing')
-  domImage.convertToImage(
-    document.getElementById(cid)
-  ).then((res) => {
-    document.getElementsByTagName('html')[0].classList.remove('printing')
-    const div = document.createElement('div')
-    const id = uuid()
-    div.setAttribute('class', 'print-img-wrap')
-    div.innerHTML = `<img id="${id}" src="${res}" alt="">`
-    document.body.appendChild(div)
-    this.$nextTick(() => {
-      print({
-        printable: id,
-        type: 'html',
-        targetStyles: ['*'],
-        scanStyles: false
-      })
-      div.remove()
-    })
-  }).catch(() => {
-    document.getElementsByTagName('html')[0].classList.remove('printing')
-  })
 }
 
 Vue.config.productionTip = false
