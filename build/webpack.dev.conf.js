@@ -14,21 +14,6 @@ const proxyTable = require('../config/proxyTable')
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
-function getIPAdress(){
-  const interfaces = os.networkInterfaces()
-  for(let devName in interfaces){
-    let iface = interfaces[devName]
-    for(let i = 0; i < iface.length; i++){
-      let alias = iface[i]
-      if(alias.family === 'IPv4' &&
-      alias.address !== '127.0.0.1' &&
-      !alias.internal){
-        return alias.address
-      }
-    }
-  }
-}
-const myIp = getIPAdress() //本地IP地址
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -97,7 +82,7 @@ module.exports = new Promise((resolve, reject) => {
         `Your application is running here: http://localhost:${port}`
       ]
       for (const key in proxyTable) {
-        list.push(`${key} application is running here: http://${myIp}:${port}/?pt=${key}`)
+        list.push(`${key} application is running here: http://localhost:${port}/?pt=${key}`)
       }
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(

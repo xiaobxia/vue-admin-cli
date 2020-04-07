@@ -1,4 +1,3 @@
-import { getToken } from '@/utils/auth'
 import Http from '@/utils/httpUtil'
 import md5 from 'md5'
 import storageUtil from '@/utils/storageUtil'
@@ -8,7 +7,6 @@ const user = {
     user: '',
     status: '',
     code: '',
-    token: getToken(),
     name: '',
     avatar: '',
     introduction: '',
