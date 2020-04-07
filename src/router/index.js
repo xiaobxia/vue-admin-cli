@@ -110,7 +110,6 @@ export const asyncRouterMap = [
       }
     ]
   },
-
   {
     path: '/tab',
     component: Layout,
@@ -123,7 +122,6 @@ export const asyncRouterMap = [
       }
     ]
   },
-
   {
     path: '/error',
     component: Layout,
@@ -148,7 +146,6 @@ export const asyncRouterMap = [
       }
     ]
   },
-
   {
     path: '/excel',
     component: Layout,
@@ -179,7 +176,6 @@ export const asyncRouterMap = [
       }
     ]
   },
-
   {
     path: '/zip',
     component: Layout,
