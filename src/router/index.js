@@ -75,12 +75,6 @@ export const constantRouterMap = [
   }
 ]
 
-export default new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap
-})
-
 export const asyncRouterMap = [
   componentsRouter,
   chartsRouter,
@@ -226,3 +220,20 @@ export const asyncRouterMap = [
   },
   { path: '*', redirect: '/404', hidden: true }
 ]
+
+const createRouter = () => new Router({
+  // mode: 'history', // require service support
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRouterMap
+})
+
+const router = createRouter()
+
+// 重新设置路由
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
+
+export default router
+

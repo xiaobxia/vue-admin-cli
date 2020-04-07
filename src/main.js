@@ -79,9 +79,11 @@ Vue.prototype.$getPageIndexAfterDelete = function(pageIndex, size, total, delete
 
 // 打印的方法
 Vue.prototype.$print = function(cid) {
+  document.getElementsByTagName('html')[0].classList.add('printing')
   domImage.convertToImage(
     document.getElementById(cid)
   ).then((res) => {
+    document.getElementsByTagName('html')[0].classList.remove('printing')
     const div = document.createElement('div')
     const id = uuid()
     div.setAttribute('class', 'print-img-wrap')
@@ -96,6 +98,8 @@ Vue.prototype.$print = function(cid) {
       })
       div.remove()
     })
+  }).catch(() => {
+    document.getElementsByTagName('html')[0].classList.remove('printing')
   })
 }
 
