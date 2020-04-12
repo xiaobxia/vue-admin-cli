@@ -151,3 +151,14 @@ body {
 body .el-table th.gutter {
   display: table-cell !important;
 }
+
+// 等于或大于992px（pc窄屏）
+@media (min-width: 992px) {
+}
+
+// 等于或大于1200px（ pc宽屏）
+@media (min-width: 1200px) {
+}
+// pc超大屏 1380px
+@media (min-width: 1380px) {
+}
