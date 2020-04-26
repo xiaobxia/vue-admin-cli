@@ -80,3 +80,18 @@
     display: block
   }
 }
+
+ // 表格子单元
+ .sub-cell-col {
+   padding: 0!important;
+   .cell {
+     padding: 0;
+   }
+   .sub-cell {
+     padding: 12px 10px;
+     border-bottom: 1px solid #bbb;
+     &:last-child{
+       border-bottom: none;
+     }
+   }
+ }
