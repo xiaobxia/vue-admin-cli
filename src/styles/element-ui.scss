@@ -83,7 +83,9 @@
 
  // 表格子单元
  .sub-cell-col {
+   position: relative;
    padding: 0!important;
+   min-height: 47.4px;
    .cell {
      padding: 0;
    }
