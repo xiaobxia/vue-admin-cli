@@ -30,5 +30,14 @@ export default {
     } else {
       callback()
     }
+  },
+  // 只能是数字,可以00001这样
+  validateNumberText(rule, value, callback) {
+    const re = /^\d+$/g
+    if (!re.test(value)) {
+      callback(new Error('必须为数字值!'))
+    } else {
+      callback()
+    }
   }
 }

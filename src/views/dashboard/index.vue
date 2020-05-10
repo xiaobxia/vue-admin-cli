@@ -30,6 +30,15 @@
         :label="item.label"
         :value="item.value"/>
     </el-select>
+    <div class="g-w">
+      <div class="icon-wrap">
+        <img src="../../assets/gzh.png" alt="">
+      </div>
+      <div class="text-wrap">
+        <div>新朋友点击<i class="el-icon-top"/>上方<span class="text">“养基定投波段”</span>，关注后在菜单使用信号工具</div>
+        <div>老朋友点击右上角<i class="el-icon-more"/>，分享文章给朋友</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -145,4 +154,44 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+  .g-w {
+    position: relative;
+    margin-top: 20px;
+    width: 1082px;
+    height: 165px;
+    border: 1px solid #eee;
+    .icon-wrap {
+      position: absolute;
+      left: 20px;
+      top: 16px;
+      height: 130px;
+      width: 130px;
+      border-radius: 130px;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .text-wrap {
+      position: absolute;
+      height: 100%;
+      width: 900px;
+      left: 180px;
+      font-size: 28px;
+      font-weight: 600;
+      color: rgb(36, 41, 46);
+      letter-spacing: 3px;
+      padding: 20px 0;
+      i {
+        font-weight: 800;
+      }
+      div {
+        line-height: 60px;
+      }
+      span {
+        color: #337ab7;
+      }
+    }
+  }
 </style>
