@@ -1,13 +1,16 @@
-function formatNum(str, len) {
+import store from '../store/index'
+const commonData = store.state.common
+// 最原始的金额格式化函数
+function formatMoneyRaw(str, decimal) {
   let newStr = ''
   let count = 0
   let startCode = ''
-  len = len || 2
+  decimal = decimal || 2
   let zero = ''
-  for (let i = 0; i < len; i++) {
+  for (let i = 0; i < decimal; i++) {
     zero += '0'
   }
-  str = '' + str
+  str = str ? '' + str : '0'
   if (str.charAt(0) === '-') {
     str = str.slice(1)
     startCode = '-'
@@ -34,10 +37,16 @@ function formatNum(str, len) {
       }
       count++
     }
-    str = newStr + (str + zero).substr((str + zero).indexOf('.'), len + 1)
+    str = newStr + (str + zero).substr((str + zero).indexOf('.'), decimal + 1)
     return startCode + str
   }
 }
+
+// 转化为数字可以小数点可以负数
+function clearToNumber(value) {
+  return parseFloat(value) || ''
+}
+
 const numberUtil = {
   countRate: function(numerator, denominator) {
     denominator = denominator || 1
@@ -46,7 +55,9 @@ const numberUtil = {
   countDifferenceRate: function(numerator, denominator) {
     denominator = denominator || 1
     numerator = numerator || 1
-    return Math.round(1000000 * ((numerator - denominator) / denominator)) / 10000
+    return (
+      Math.round(1000000 * ((numerator - denominator) / denominator)) / 10000
+    )
   },
   keepTwoDecimals: function(number) {
     return Math.round(100 * number) / 100
@@ -63,19 +74,20 @@ const numberUtil = {
   },
   ifAround: function(number, target) {
     const step = 100
-    return (number >= (target - step)) && (number <= (target + step))
+    return number >= target - step && number <= target + step
   },
-  formatMoney(number) {
-    return formatNum(number, 2)
+  formatMoneyRaw,
+  // 创造金额格式化函数
+  createMoneyFormat: function(len) {
+    return function(value) {
+      return formatMoneyRaw(value, len)
+    }
   },
   // 数字转大写
   digitUppercase(n) {
     const fraction = ['角', '分']
     const digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
-    const unit = [
-      ['元', '万', '亿'],
-      ['', '拾', '佰', '仟']
-    ]
+    const unit = [['元', '万', '亿'], ['', '拾', '佰', '仟']]
     const head = n < 0 ? '欠' : ''
     n = Math.abs(n)
     let s = ''
@@ -102,31 +114,43 @@ const numberUtil = {
         .replace(/^整$/, '零元整')
     )
   },
-  // 只能是数字
-  replaceNoNumber(value) {
-    // 修复第一个字符是小数点 的情况.
-    if (value !== '' && value.substr(0, 1) === '.') {
-      value = ''
+  // 转化为数字可以小数点可以负数
+  clearToNumber,
+  //  转化为数字可以小数点可以负数
+  replaceToNumber(row, key) {
+    row[key] = clearToNumber(row[key])
+  },
+  // 转化为数字文本
+  clearToTextNumber(value) {
+    return value.replace(/[^\d]/g, '')
+  },
+  // 输入保留设定的小数位数  key：currency:本币  foreign：外币
+  handleInputChangeNumber(data, key) {
+    let decimalNum = 2
+    if (key === 'currency') {
+      decimalNum = commonData.sysParam.standardCurrencyDig
     }
-    value = value.replace(/^0*(0\.|[1-9])/, '$1') // 解决 粘贴不生效
-    value = value.replace(/[^-\d.]/g, '') // 清除“数字”和“.”以外的字符
-    value = value.replace(/\.{2,}/g, '.') // 只保留第一个. 清除多余的
-    value = value
+    if (key === 'foreign') {
+      decimalNum = commonData.sysParam.foreignCurrencyDig
+    }
+    // 先把非数字的都替换掉(空)，除了数字和.
+    data = data.replace(/[^\d.]/g, '')
+    // 必须保证第一个为数字而不是.
+    data = data.replace(/^\./g, '')
+    // 保证只有出现一个.而没有多个.
+    data = data.replace(/\.{3,}/g, '')
+    // 保证.只出现一次，而不能出现两次以上
+    data = data
       .replace('.', '$#$')
       .replace(/\./g, '')
       .replace('$#$', '.')
-    value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3') // 只能输入两个小数
-    if (value.indexOf('.') < 0 && value !== '') {
-      // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
-      if (value.substr(0, 1) === '0' && value.length === 2) {
-        value = value.substr(1, value.length)
-      }
-    }
-    return value
-  },
-  // 只能是数字串
-  replaceToNumberStr(value) {
-    return value.replace(/[^\d]/g, '')
+    // 限制几位小数
+    data = data
+      ? (
+        Math.round(data * Math.pow(10, decimalNum)) / Math.pow(10, decimalNum)
+      ).toFixed(decimalNum)
+      : ''
+    return data
   }
 }
 
