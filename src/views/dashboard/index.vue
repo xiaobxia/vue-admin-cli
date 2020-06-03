@@ -39,7 +39,7 @@
     <!--<div>老朋友点击右上角<i class="el-icon-more"/>，分享文章给朋友</div>-->
     <!--</div>-->
     <!--</div>-->
-    <div class="a">
+    <div style="display: none" class="a">
       <div class="b">
         <div class="c">
           <div class="t">
@@ -58,11 +58,14 @@
       <el-table
         :data="tableData"
         border
-        style="width: 100%">
+        size="mini"
+        style="width: 100%; font-size: 20px!important;">
         <el-table-column
+          align="center"
           prop="name"
           label="指数"/>
         <el-table-column
+          align="center"
           prop="rate"
           label="近两日涨幅"/>
       </el-table>
