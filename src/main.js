@@ -19,6 +19,7 @@ import Http from '@/utils/httpUtil.js'
 import numberUtil from '@/utils/numberUtil.js'
 import stringUtil from '@/utils/stringUtil.js'
 import fileUtil from '@/utils/fileUtil.js'
+import printUtil from '@/utils/printUtil.js'
 
 import typeValue from '@/common/typeValue' // global filters
 
@@ -54,6 +55,7 @@ registerUtil(stringUtil)
 registerUtil(fileUtil)
 // 常量格式化
 registerUtil(typeValue)
+registerUtil(printUtil)
 
 // 按钮级别鉴权
 Vue.prototype.$hasPermission = function(key) {

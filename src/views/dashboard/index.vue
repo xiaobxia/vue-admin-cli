@@ -53,6 +53,20 @@
         </div>
       </div>
     </div>
+    <el-button @click="printHanlder">打印</el-button>
+    <div id="p-w" class="gzh-wrap">
+      <el-table
+        :data="tableData"
+        border
+        style="width: 100%">
+        <el-table-column
+          prop="name"
+          label="指数"/>
+        <el-table-column
+          prop="rate"
+          label="近两日涨幅"/>
+      </el-table>
+    </div>
   </div>
 </template>
 
@@ -105,7 +119,19 @@ export default {
         children: 'children',
         label: 'label'
       },
-      userStatus: ''
+      userStatus: '',
+      tableData: [
+        { name: '计算机', rate: '4.3%' },
+        { name: '电子', rate: '7.4%' },
+        { name: '信息', rate: '5.5%' },
+        { name: '银行', rate: '2%' },
+        { name: '保险', rate: '4%' },
+        { name: '证券', rate: '4%' },
+        { name: '医药', rate: '1.2%' },
+        { name: '医疗', rate: '0.3%' },
+        { name: '生物', rate: '-0.6%' },
+        { name: '食品饮料', rate: '1.4%' }
+      ]
     }
   },
   component: { BlankSpace },
@@ -162,12 +188,20 @@ export default {
     },
     userStatusChangeHandler(value) {
       console.log(this.$formatUserStatus(value) || '全部')
+    },
+    printHanlder() {
+      this.$getDomImg('p-w')
     }
   }
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+  .gzh-wrap {
+    position: relative;
+    margin-top: 20px;
+    width: 1082px;
+  }
   .g-w {
     position: relative;
     margin-top: 20px;
