@@ -72,6 +72,18 @@ export const constantRouterMap = [
         meta: { title: 'ocxPage', icon: 'fas fa-tachometer-alt', noCache: true }
       }
     ]
+  },
+  {
+    path: '/gpPage',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/gpPage/index'),
+        name: 'GPPage',
+        meta: { title: 'GPPage', icon: 'fas fa-tachometer-alt', noCache: true }
+      }
+    ]
   }
 ]
 

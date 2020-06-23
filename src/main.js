@@ -1,5 +1,5 @@
 // 兼容ie
-// import 'babel-polyfill'
+import 'babel-polyfill'
 import Vue from 'vue'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import '../static/web-fonts-with-css/css/font-awesome.css'
