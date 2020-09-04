@@ -29,7 +29,7 @@
     "print-js": "^1.0.63",
     "qiniu": "^7.2.1",
     "screenfull": "3.3.3",
-    "showdown": "1.8.6",
+    "showdown": "1.9.1",
     "sortablejs": "1.7.0",
     "tui-editor": "1.2.7",
     "vue": "^2.6.11",
