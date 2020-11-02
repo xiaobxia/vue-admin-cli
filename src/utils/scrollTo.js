@@ -1,4 +1,8 @@
 Math.easeInOutQuad = function(t, b, c, d) {
+  // t 当前动画时间ms
+  // b 起始数
+  // c 变化数
+  // d 动画时间ms
   t /= d / 2
   if (t < 1) {
     return c / 2 * t * t + b
@@ -36,6 +40,38 @@ export function scrollTo(to, duration, callback) {
     var val = Math.easeInOutQuad(currentTime, start, change, duration)
     // move the document.body
     move(val)
+    // do the animation unless its over
+    if (currentTime < duration) {
+      requestAnimFrame(animateScroll)
+    } else {
+      if (callback && typeof (callback) === 'function') {
+        // the animation is done so lets callback
+        callback()
+      }
+    }
+  }
+  animateScroll()
+}
+
+// 移动节点
+function moveDom(dom, direction, amount) {
+  dom[direction] = amount
+}
+
+// 移动节点
+export function domScrollTo(dom, direction, to, duration, callback) {
+  const start = dom[direction]
+  const change = to - start
+  const increment = 20
+  let currentTime = 0
+  duration = (typeof (duration) === 'undefined') ? 500 : duration
+  var animateScroll = function() {
+    // increment the time
+    currentTime += increment
+    // find the value with the quadratic in-out easing function
+    var val = Math.easeInOutQuad(currentTime, start, change, duration)
+    // move the document.body
+    moveDom(dom, direction, val)
     // do the animation unless its over
     if (currentTime < duration) {
       requestAnimFrame(animateScroll)
